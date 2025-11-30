@@ -311,6 +311,7 @@ h1, h2 {
     border-radius: 10px;
     font-size: clamp(1rem, 4vw, 1.2rem);
     line-height: 1.4;
+    display: none;
 }
 
 #player-now {
