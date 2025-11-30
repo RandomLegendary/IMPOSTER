@@ -1,0 +1,355 @@
+/* Reset and base styles */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-image: url('background.png');
+    background-size: auto;
+    background-repeat: repeat;
+    background-position: 0 0;
+    overflow-x: hidden;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    text-shadow: 1px 1px 1px  #353535;
+}
+
+/* Remove the transform: scale(0.8) as it causes issues on mobile */
+/* Instead, we'll use proper responsive units */
+
+/* Typography */
+h1, h2 {
+    text-align: center;
+    margin: 10px 0;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    position: static;
+    transform: none;
+    left: auto;
+    top: auto;
+}
+
+#title-imposter {
+    font-size: clamp(1.8rem, 6vw, 3rem);
+    margin: 20px 0;
+    position: static;
+    transform: none;
+    left: auto;
+    top: auto;
+}
+
+/* Main button */
+#start-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 20px;
+    color: white;
+    text-shadow: 1px 1px 2px rgb(116, 116, 116);
+    text-transform: capitalize;
+    cursor: pointer;
+    border: solid 2px black;
+    letter-spacing: 1px;
+    font-weight: 600;
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    background-color: hsl(49deg 98% 60%);
+    border-radius: 50px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    margin: 30px auto;
+    width: 90%;
+    max-width: 300px;
+    transform: none !important; /* Remove the 200% scale */
+    position: static;
+}
+
+#start-button:active {
+    transform: scale(0.98) !important;
+}
+
+#start-button svg {
+    width: 28px;
+    height: 28px;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.play {
+    transition: all 0.3s ease;
+    transition-delay: 200ms;
+}
+
+
+#info, #player-now {
+    text-align: center;
+    width: 100%;
+}
+
+#start-button:hover .play,
+#start-button:focus .play {
+    transform: translateX(150%);
+    transition-delay: 200ms;
+}
+
+/* Input fields */
+#input-fields {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 0 15px;
+    align-items: center;
+}
+
+.textInputWrapper {
+    position: relative;
+    width: 100%;
+    margin: 15px 0;
+    --accent-color: #a3e583;
+}
+
+.textInputWrapper:before {
+    transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+}
+
+.textInputWrapper:before,
+.textInputWrapper:after {
+    content: "";
+    left: 0;
+    right: 0;
+    position: absolute;
+    pointer-events: none;
+    bottom: -1px;
+    z-index: 4;
+    width: 100%;
+}
+
+.textInputWrapper:focus-within:before {
+    border-bottom: 1px solid var(--accent-color);
+}
+
+.textInputWrapper:before {
+    transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+}
+
+.textInputWrapper:focus-within:before {
+    border-bottom: 1px solid var(--accent-color);
+    transform: scaleX(1);
+}
+
+.textInputWrapper:focus-within:after {
+    border-bottom: 2px solid var(--accent-color);
+    transform: scaleX(1);
+}
+
+.textInputWrapper:after {
+    content: "";
+    transform: scaleX(0);
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+    will-change: transform;
+    border-bottom: 2px solid var(--accent-color);
+    border-bottom-color: var(--accent-color);
+}
+
+.textInput::placeholder {
+    transition: opacity 250ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+    opacity: 1;
+    user-select: none;
+    color: rgba(255, 255, 255, 0.582);
+}
+
+.textInputWrapper .textInput {
+    border-radius: 5px 5px 0px 0px;
+    box-shadow: 0px 2px 5px rgb(35 35 35 / 30%);
+    height: 44px; /* Better touch target */
+    background-color: #252525;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-duration: 200ms;
+    transition-property: background-color;
+    color: #e8e8e8;
+    font-size: 16px; /* Prevents zoom on iOS */
+    font-weight: 500;
+    padding: 12px;
+    width: 100%;
+    border-left: none;
+    border-bottom: none;
+    border-right: none;
+}
+
+.textInputWrapper .textInput:focus,
+.textInputWrapper .textInput:active {
+    outline: none;
+}
+
+.textInputWrapper:focus-within .textInput,
+.textInputWrapper .textInput:focus,
+.textInputWrapper .textInput:active {
+    background-color: #353535;
+}
+
+.textInputWrapper:focus-within .textInput::placeholder {
+    opacity: 0;
+}
+
+/* Submit button */
+.submit-button {
+    position: relative;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    padding: 12px 24px;
+    background-color: rgb(0 107 179);
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #ffff;
+    gap: 10px;
+    font-weight: bold;
+    border: 3px solid #ffffff4d;
+    outline: none;
+    overflow: hidden;
+    font-size: 16px;
+    margin: 30px auto;
+    width: fit-content;
+    min-height: 50px; /* Better touch target */
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.submit-button:active {
+    transform: scale(0.98);
+    border-color: #fff9;
+}
+
+.submit-button:active .icon {
+    transform: translateX(4px);
+}
+
+.submit-button:hover::before {
+    animation: shine 1.5s ease-out infinite;
+}
+
+@keyframes shine {
+    0% {
+        left: -100px;
+    }
+
+    60% {
+        left: 100%;
+    }
+
+    to {
+        left: 100%;
+    }
+}
+
+/* Game buttons */
+#show-hide-button,
+#next-player-button,
+#reveal {
+    display: none;
+    padding: 12px 20px;
+    margin: 10px auto;
+    width: 90%;
+    max-width: 300px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-height: 44px; /* Minimum touch target size */
+    position: static;
+}
+
+#show-hide-button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#next-player-button {
+    background-color: #2196F3;
+    color: white;
+}
+
+#reveal {
+    background-color: #f44336;
+    color: white;
+}
+
+#show-hide-button:active,
+#next-player-button:active,
+#reveal:active {
+    transform: scale(0.98);
+}
+
+/* Info display */
+#info {
+    text-align: center;
+    margin: 20px 10px;
+    padding: 15px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    line-height: 1.4;
+}
+
+#player-now {
+    font-size: clamp(1.2rem, 5vw, 1.5rem);
+    margin: 20px 0;
+    text-align: center;
+}
+
+/* Media queries for additional responsiveness */
+@media (max-width: 480px) {
+    body {
+        padding: 15px 10px;
+    }
+    
+    #input-fields {
+        padding: 0 10px;
+    }
+    
+    .textInputWrapper {
+        margin: 12px 0;
+    }
+    
+    #start-button,
+    #show-hide-button,
+    #next-player-button,
+    #reveal {
+        width: 95%;
+    }
+}
+
+@media (min-width: 768px) {
+    #input-fields {
+        max-width: 500px;
+    }
+    
+    #start-button,
+    #show-hide-button,
+    #next-player-button,
+    #reveal {
+        max-width: 350px;
+    }
+}

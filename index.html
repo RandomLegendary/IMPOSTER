@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imposter</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1 id="title-imposter">IMPOSTER</h1>
+    <!-- From Uiverse.io by barisdogansutcu --> 
+    <button onclick="start()" id="start-button">
+        <span class="play">play</span>
+    </button>
+    <div id="input-fields" class="textInputWrapper">
+        <label for="name1">Player 1:</label>
+        <input type="text" name="name1" id="name1" class="textInput">
+        <label for="name2">Player 2:</label>
+        <input type="text" name="name2" id="name2" class="textInput">
+        <label for="name3">Player 3:</label>
+        <input type="text" name="name3" id="name3" class="textInput">
+        <label for="name4">Player 4:</label>
+        <input type="text" name="name4" id="name4" class="textInput">
+        <label for="name5">Player 5:</label>
+        <input type="text" name="name5" id="name5" class="textInput">
+        <label for="name6">Player 6:</label>
+        <input type="text" name="name6" id="name6" class="textInput">
+        <label for="name7">Player 7:</label>
+        <input type="text" name="name7" id="name7" class="textInput">
+        <label for="name8">Player 8:</label>
+        <input type="text" name="name8" id="name8" class="textInput">
+        <label for="name9">Player 9:</label>
+        <input type="text" name="name9" id="name9" class="textInput">
+        <label for="name">Player 10:</label>
+        <input type="text" name="name10" id="name10" class="textInput">
+        <!-- From Uiverse.io by adeladel522 --> 
+        <button class="submit-button" onclick="submit()">
+        SUBMIT!
+            <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
+                <path
+                clip-rule="evenodd"
+                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
+                fill-rule="evenodd"
+                ></path>
+            </svg>
+        </button>
+        </div>
+
+        <button id="show-hide-button" onclick="showhide()">SHOW</button>
+         <h1 id="info"></h1>
+         <h2 id="player-now"></h2>
+         <button id="next-player-button">.</button>
+        
+         <button id="reveal" onclick="revealTheImposter()">Reveal The Imposter!</button>
+        
+</body>
+</html>
