@@ -10,6 +10,7 @@ const infoH1 = document.getElementById('info')
 const playerNow = document.getElementById('player-now')
 const showHideButton = document.getElementById('show-hide-button')
 const nextPlayerButton = document.getElementById('next-player-button')
+const restartButton = document.getElementById('restart')
 
 startButton.addEventListener('click', start)
 submitButton.addEventListener('click', submit)
@@ -59,7 +60,6 @@ function submit() {
 
         playerBetweenValues.forEach(player => {
             if (player.value) {
-                console.log(player.value)
                 playerValues.push(player.value)
             }
         })
@@ -133,7 +133,9 @@ function showhide() {
 
 let clicked = false
 
-nextPlayerButton.addEventListener('click', () => {
+nextPlayerButton.addEventListener('click', nextPlayer)
+
+function nextPlayer()  {
     changeButtonText()
     
     if (temp >= amount_of_players - 1) {
@@ -165,7 +167,8 @@ nextPlayerButton.addEventListener('click', () => {
     }
 
 
-})
+}
+
 let in_move = 1;
 function changeButtonText() {
     nextPlayerButton.innerHTML = `Volgende: ${playerValues[in_move]}`
@@ -189,6 +192,34 @@ revealButton.addEventListener('click', revealTheImposter)
 
 function revealTheImposter() {
     infoH1.innerHTML = `${playerValues[number_imposter - 1]} is the IMPOSTER!`
+    restartButton.style.display = 'block'
+}
+
+restartButton.addEventListener('click' , restart)
+
+function restart() {
+    restartButton.style.display = 'none';
+    revealButton.style.display = 'none';
+    infoH1.style.display = 'none';
+    showHideButton.style.display = 'inline-block';
+    nextPlayerButton.style.display = 'block';
+    playerNow.style.display = 'block';
+
+    shuffle(playerValues)
+
+    full_word = getRandomItem(woorden)
+    keyword = full_word.key
+    hint = full_word.value
+
+    number_imposter = randomIntFromInterval(amount_of_players)
+    in_move = 1
+    temp = 1
+    clicked = false
+
+    showHideButton.innerHTML = 'SHOW';
+    nextPlayerButton.innerHTML = `Volgende: ${playerValues[0]}`
+    playerNow.innerHTML = `Nu aan het kijken: ${playerValues[0]}`
+
 }
 
 // Credits: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
