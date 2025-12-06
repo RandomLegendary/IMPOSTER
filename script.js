@@ -171,8 +171,8 @@ function nextPlayer()  {
 
 let in_move = 1;
 function changeButtonText() {
-    nextPlayerButton.innerHTML = `Volgende: ${playerValues[in_move]}`
     playerNow.innerHTML = `Nu aan het kijken: ${playerValues[in_move - 1]}`
+    nextPlayerButton.innerHTML = `Volgende: ${playerValues[in_move]}`
     in_move ++
 }
 
