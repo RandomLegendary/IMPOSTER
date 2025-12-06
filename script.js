@@ -3,31 +3,8 @@ import { woorden } from './constants.js'
 
 const startButton = document.getElementById('start-button');
 const divInputFields = document.getElementById('input-fields');
-const submitButton = document.querySelector('.submit-button')
-
-const name1 = document.getElementById('name1');
-const name2 = document.getElementById('name2');
-const name3 = document.getElementById('name3');
-const name4 = document.getElementById('name4');
-const name5 = document.getElementById('name5');
-const name6 = document.getElementById('name6');
-const name7 = document.getElementById('name7');
-const name8 = document.getElementById('name8');
-const name9 = document.getElementById('name9');
-const name10 = document.getElementById('name10');
-
-let players = [];
-
-let name1Value = '';
-let name2Value = '';
-let name3Value = '';
-let name4Value = '';
-let name5Value = '';
-let name6Value = '';
-let name7Value = '';
-let name8Value = '';
-let name9Value = '';
-let name10Value = '';
+const submitButton = document.querySelector('.submit-button');
+const numberInput = document.getElementById('number-input');
 
 const infoH1 = document.getElementById('info')
 const playerNow = document.getElementById('player-now')
@@ -35,13 +12,33 @@ const showHideButton = document.getElementById('show-hide-button')
 const nextPlayerButton = document.getElementById('next-player-button')
 
 startButton.addEventListener('click', start)
+submitButton.addEventListener('click', submit)
 
 function start() {
-    setTimeout(function() {
-        startButton.style.display = 'none'
+    if (numberInput.value > 0) {
+        setTimeout(function() {
+        startButton.innerHTML = 'Restart'
+        divInputFields.innerHTML = ''
         divInputFields.style.display = 'inline-block'
-        submitButton.addEventListener('click', submit)
+        submitButton.style.display = 'block'
+
+        let index = 1
+
+        while (index - 1 != numberInput.value) {
+            const el = document.createElement('input')
+            el.type = 'text'
+            el.name =  `name${index}`
+            el.id = `name${index}`
+            el.classList.add(`textInput`)
+            const labEl = document.createElement('label')
+            labEl.setAttribute('for', `name${index}`)
+            labEl.innerHTML = `Player ${index}:`
+            index ++
+            divInputFields.appendChild(labEl)
+            divInputFields.appendChild(el)
+        }
     }, 1200)
+    }
 }
 
 let amount_of_players = 0
@@ -49,69 +46,36 @@ let number_imposter = 0
 let full_word = []
 let keyword = ''
 let hint = ''
+let playerValues = []
+let playerBetweenValues = []
 
 function submit() {
     setTimeout(function() {
-        players = [];
-        amount_of_players = 0;
-       
-        if (name1.value.trim() !== '') {
-            name1Value = name1.value;
-            players.push(name1Value);
-            amount_of_players++;
-        }
-        if (name2.value.trim() !== '') {
-            name2Value = name2.value;
-            players.push(name2Value);
-            amount_of_players++;
-        }
-        if (name3.value.trim() !== '') {
-            name3Value = name3.value;
-            players.push(name3Value);
-            amount_of_players++;
-        }
-        if (name4.value.trim() !== '') {
-            name4Value = name4.value;
-            players.push(name4Value);
-            amount_of_players++;
-        }
-        if (name5.value.trim() !== '') {
-            name5Value = name5.value;
-            players.push(name5Value);
-            amount_of_players++;
-        }
-        if (name6.value.trim() !== '') {
-            name6Value = name6.value;
-            players.push(name6Value);
-            amount_of_players++;
-        }
-        if (name7.value.trim() !== '') {
-            name7Value = name7.value;
-            players.push(name7Value);
-            amount_of_players++;
-        }
-        if (name8.value.trim() !== '') {
-            name8Value = name8.value;
-            players.push(name8Value);
-            amount_of_players++;
-        }
-        if (name9.value.trim() !== '') {
-            name9Value = name9.value;
-            players.push(name9Value);
-            amount_of_players++;
-        }
-        if (name10.value.trim() !== '') {
-            name10Value = name10.value;
-            players.push(name10Value);
-            amount_of_players++;
-        }
+        let players = document.querySelectorAll('.textInput').forEach(el => {
+            if (el) {
+                playerBetweenValues.push(el)
+            }
+        })
 
-        shuffle(players)
+        playerBetweenValues.forEach(player => {
+            if (player.value) {
+                console.log(player.value)
+                playerValues.push(player.value)
+            }
+        })
+
+        amount_of_players = playerValues.length;
+       
+
+        shuffle(playerValues)
 
         divInputFields.style.display = 'none'
+        startButton.style.display = 'none'
+        submitButton.style.display = 'none'
+        numberInput.style.display = 'none'
         showHideButton.style.display = 'inline-block'
         nextPlayerButton.style.display = 'block'
-        nextPlayerButton.innerHTML = `Volgende: ${players[0]}`
+        nextPlayerButton.innerHTML = `Volgende: ${playerValues[0]}`
 
         full_word = getRandomItem(woorden)
         keyword = full_word.key
@@ -120,7 +84,7 @@ function submit() {
         number_imposter = randomIntFromInterval(amount_of_players)
         // console.log("Total players:", amount_of_players);
         // console.log("Imposter index:", number_imposter);
-        // console.log("Players:", players);
+        // console.log("Players:", playerValues);
         // console.log("Keyword:", keyword);
         // console.log("Hint:", hint);
         changeButtonText();
@@ -187,7 +151,7 @@ nextPlayerButton.addEventListener('click', () => {
         nextPlayerButton.style.display = 'none'
         showHideButton.style.display = 'none'
         let beginPlayer = randomIntFromInterval(amount_of_players) - 1
-        infoH1.innerHTML = `${players[beginPlayer]} mag beginnen!`
+        infoH1.innerHTML = `${playerValues[beginPlayer]} mag beginnen!`
         playerNow.style.display = 'none'
         infoH1.style.display = 'block'
 
@@ -204,8 +168,8 @@ nextPlayerButton.addEventListener('click', () => {
 })
 let in_move = 1;
 function changeButtonText() {
-    nextPlayerButton.innerHTML = `Volgende: ${players[in_move]}`
-    playerNow.innerHTML = `Nu aan het kijken: ${players[in_move - 1]}`
+    nextPlayerButton.innerHTML = `Volgende: ${playerValues[in_move]}`
+    playerNow.innerHTML = `Nu aan het kijken: ${playerValues[in_move - 1]}`
     in_move ++
 }
 
@@ -224,7 +188,7 @@ const revealButton = document.getElementById('reveal')
 revealButton.addEventListener('click', revealTheImposter)
 
 function revealTheImposter() {
-    infoH1.innerHTML = `${players[number_imposter - 1]} is the IMPOSTER!`
+    infoH1.innerHTML = `${playerValues[number_imposter - 1]} is the IMPOSTER!`
 }
 
 // Credits: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array

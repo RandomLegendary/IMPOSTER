@@ -212,7 +212,7 @@ h1, h2 {
     padding: 12px 24px;
     background-color: rgb(0 107 179);
     border-radius: 50px;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     cursor: pointer;
@@ -246,6 +246,40 @@ h1, h2 {
 .submit-button:hover::before {
     animation: shine 1.5s ease-out infinite;
 }
+
+/* From Uiverse.io by tiagoadag1203 */ 
+.input {
+  max-width: 190px;
+  background-color: #1a1a1a;
+  border: none;
+  padding: 20px;
+  border-radius: 10px;
+  outline: none;
+  color: white;
+}
+
+.input:focus {
+  animation: rotateShadow 2s infinite linear;
+}
+
+@keyframes rotateShadow {
+  0% {
+    box-shadow: -2px -2px 0px 0px #aa00ff, 2px 2px 0px 0px #3700ff;
+  }
+  25% {
+    box-shadow: -2px 2px 0px 0px #aa00ff, 2px -2px 0px 0px #3700ff;
+  }
+  50% {
+    box-shadow: 2px 2px 0px 0px #aa00ff, -2px -2px 0px 0px #3700ff;
+  }
+  75% {
+    box-shadow: 2px -2px 0px 0px #aa00ff, -2px 2px 0px 0px #3700ff;
+  }
+  100% {
+    box-shadow: -2px -2px 0px 0px #aa00ff, 2px 2px 0px 0px #3700ff;
+  }
+}
+
 
 @keyframes shine {
     0% {
