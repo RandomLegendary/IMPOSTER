@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Imposter</title>
-    <script src="script.js" defer></script>
+    <script src="script.js" defer type="module"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1 id="title-imposter">IMPOSTER</h1>
     <!-- From Uiverse.io by barisdogansutcu --> 
-    <button onclick="start()" id="start-button">
+    <button id="start-button">
         <span class="play">play</span>
     </button>
     <div id="input-fields" class="textInputWrapper">
@@ -35,7 +35,7 @@
         <label for="name">Player 10:</label>
         <input type="text" name="name10" id="name10" class="textInput">
         <!-- From Uiverse.io by adeladel522 --> 
-        <button class="submit-button" onclick="submit()">
+        <button class="submit-button">
         SUBMIT!
             <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
                 <path
@@ -47,12 +47,12 @@
         </button>
         </div>
 
-        <button id="show-hide-button" onclick="showhide()">SHOW</button>
+        <button id="show-hide-button">SHOW</button>
          <h1 id="info"></h1>
          <h2 id="player-now"></h2>
          <button id="next-player-button">.</button>
         
-         <button id="reveal" onclick="revealTheImposter()">Reveal The Imposter!</button>
+         <button id="reveal">Reveal The Imposter!</button>
         
 </body>
 </html>
